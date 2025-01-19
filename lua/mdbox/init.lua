@@ -9,16 +9,6 @@ local function get_position()
   }
 end
 
-function M.currentLine()
-  local pos = get_position()
-
-  print('current row: ', pos.row)
-  print('current col: ', pos.col)
-
-  local lines = vim.api.nvim_buf_get_lines(pos.bufnr, pos.row, pos.row + 1, false) -- expecting one line
-  print('current line: ', lines[1])
-end
-
 ---@param text string
 ---@param pad string
 ---@param count integer
@@ -81,8 +71,6 @@ function M.createRect(height, width)
   end
 
   local p = get_position()
-  print('row: ', p.row)
-
 
   height = math.floor(height / 2)
   width = math.floor(width / 2)
@@ -108,7 +96,6 @@ function M.createRect(height, width)
   end
   writeLine(p.bufnr, down, left, right, line)
 
-  print('row (after): ', p.row)
   vim.fn.cursor({ p.row + 1, p.col })
 end
 
